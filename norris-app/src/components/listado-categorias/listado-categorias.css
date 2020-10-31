@@ -1,0 +1,11 @@
+li {
+    border: solid 2px black;
+    padding: 2px;
+    margin-left: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.vista {
+    display: inline;
+}
