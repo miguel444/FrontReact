@@ -1,76 +1,79 @@
 import React, { SyntheticEvent } from 'react'
 import {Component} from 'react'
-import { PrimaryExpression } from 'typescript';
 import './listado-categorias.css'
-import {getCategories} from '../../services/get_categories'
-import {getRandomJoke}  from '../../services/get_random_joke'
-import {getJokeByCategory}  from '../../services/get_joke_by_category'
 import Loader from '../loader/loader'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 
 
+interface AppProps{
+    categorias: string[],
+    onListar: (e: React.MouseEvent<any>, index: number) => void,
+    selectedIndex?: number
+}
 
 
-export default class ListadoCategorias extends Component<{},{categorias: string[], frases: string, check: boolean}>{
-    constructor(props: {}){
+export default class ListadoCategorias extends Component<AppProps,{ frases: string, check: boolean}>{
+    constructor(props: AppProps){
         super(props)
         this.state = {
-            categorias: [],
             frases: "",
             check: false
         }
-        this.alerta = this.alerta.bind(this);
-    }
-
-    componentWillMount(){
-        getCategories().then(categorias => {
-            this.setState({ categorias });
-        });
-    }
-
-    alerta(e:  React.MouseEvent<HTMLLIElement>){
-
-        this.setState({check: false})
+      
        
-        getJokeByCategory(e.currentTarget.innerText).then(frase => {
-            setTimeout(()=>
-            this.setState({
-                frases: frase.value,
-                check: true
-            })
-            ,2000)
-        })
-
-       
-
     }
 
+    
+
+    
     
     
 
     render(){
-        let vista_frase;
-        if(this.state.check){
-            vista_frase =  <ul><li>{this.state.frases}</li></ul>
-        }
-        else vista_frase = <Loader message='Loading....'></Loader>
+       
+     
         
         return(
-            <div className='vista'>
-            <ul >
-                {this.state.categorias.map((e: string) =>{
-                    return(
-                    <li key={e} onClick={this.alerta}>{e}</li>
-                )
-                })}
+            
+            <div className="listado">
+            <h3> Categorías</h3>
+            <Divider />
+      <List component="nav" aria-label="main mailbox folders">
+          {this.props.categorias.map((element,index) => {
+              return(
+                <div>
+                <ListItem
+                button
+                selected={this.props.selectedIndex === index}
+                onClick={(event) => {this.props.onListar(event, index)}}
+              >
+               
+                <ListItemText style={{textAlign: 'center'}} primary={element}/>
+                
+              </ListItem> 
+              <Divider />
+              </div>
+              
 
-            </ul>
-            {vista_frase}
+              )
+          })}
+       
+      
+      </List>
+      
+      
+    </div>
+            
+         
            
             
     
 
-            </div>
+            
         )
 
     }

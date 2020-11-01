@@ -1,11 +1,23 @@
-li {
+ListGroup.Item {
     border: solid 2px black;
     padding: 2px;
+    margin-right: 0;
     margin-left: 4px;
     cursor: pointer;
-    width: 20%;
+    width: 400px;
+}
+
+ListGroup {
+    width: 50%;
+    margin-right: 0;
 }
 
 .vista {
     display: inline;
+}
+
+.listado {
+    text-align: center;
+    width: 20%;
+    margin: 10px;
 }

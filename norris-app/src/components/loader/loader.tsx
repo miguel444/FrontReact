@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 import {Component} from 'react'
 
 interface AppProps {
@@ -10,7 +10,7 @@ interface AppState {
 
 export default class Loader extends Component<AppProps,AppState>{
 
-    constructor(props: any){
+    constructor(props: AppProps){
         super(props)
     }
 
