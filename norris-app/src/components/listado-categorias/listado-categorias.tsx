@@ -9,11 +9,16 @@ import Divider from '@material-ui/core/Divider';
 
 
 
+
 interface AppProps{
     categorias: string[],
     onListar: (e: React.MouseEvent<any>, index: number) => void,
     selectedIndex?: number
 }
+
+
+
+
 
 
 export default class ListadoCategorias extends Component<AppProps,{ frases: string, check: boolean}>{
@@ -29,18 +34,14 @@ export default class ListadoCategorias extends Component<AppProps,{ frases: stri
 
     
 
-    
-    
-    
-
     render(){
-       
-     
-        
+      
+      
+            
         return(
             
             <div className="listado">
-            <h3> Categorías</h3>
+            <h3> CATEGORÍAS</h3>
             <Divider />
       <List component="nav" aria-label="main mailbox folders">
           {this.props.categorias.map((element,index) => {
@@ -50,12 +51,15 @@ export default class ListadoCategorias extends Component<AppProps,{ frases: stri
                 button
                 selected={this.props.selectedIndex === index}
                 onClick={(event) => {this.props.onListar(event, index)}}
+                style={{borderRadius: '20px'}}
+                key={element}
+
               >
                
                 <ListItemText style={{textAlign: 'center'}} primary={element}/>
                 
               </ListItem> 
-              <Divider />
+              
               </div>
               
 

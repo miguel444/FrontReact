@@ -1,76 +1,41 @@
-import {ChangeEvent, Component} from 'react'
-import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import {getTextSearch} from '../../services/get_text_search'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CopyrightIcon from '@material-ui/icons/Copyright';
 
-interface AppProps{
-    
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: 'center'
+  },
+}));
 
-interface AppState{
-    palabra_buscada: string
-    busqueda: Array<any>
-}
+export default function ButtonAppBar() {
+  const classes = useStyles();
 
-export default class Buscador extends Component<AppProps,AppState>{
-
-    constructor(props: AppProps) {
-        super(props);
-        this.state = {
-            palabra_buscada: "",
-            busqueda: []
-        }
-        this.buscar = this.buscar.bind(this)
-        
-    }
-
-    buscar(e: ChangeEvent<HTMLTextAreaElement>){
-        this.setState({
-            palabra_buscada:  e.target.value
-        })
-
-        
-        if(this.state.palabra_buscada.length >=3){
-        getTextSearch(e.target.value).then(data => {
-            
-            this.setState({
-                busqueda: data.result
-            })
-            console.log(data.result)
-            
-        })}
-        else{
-            this.setState({
-                busqueda: []
-            })
-        }
-       
-        
-
-       
-
-    
-}
-
-    render(){
-        return(
-            <div>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={this.buscar}/>
-            <ul>
-                {this.state.palabra_buscada.length>=3 ?
-                this.state.busqueda.map(element => {
-                    return(
-                        <li>{element.value}</li>
-                    )
-                })
-                : <li> No se han encontrado resultados</li>
-            }
-            </ul>
-            </div>
-            
-
-        )
-    }
-    
-    
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" >
+        <Toolbar>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <CopyrightIcon></CopyrightIcon>
+          </IconButton>
+          <Typography variant="h4" className={classes.title}>
+            NorrisApp
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }

@@ -1,17 +1,3 @@
-ListGroup.Item {
-    border: solid 2px black;
-    padding: 2px;
-    margin-right: 0;
-    margin-left: 4px;
-    cursor: pointer;
-    width: 400px;
-}
-
-ListGroup {
-    width: 50%;
-    margin-right: 0;
-}
-
 .vista {
     display: inline;
 }
@@ -19,5 +5,8 @@ ListGroup {
 .listado {
     text-align: center;
     width: 20%;
-    margin: 10px;
+    margin: 20px;
+    margin-right: 0;
+    background-color: white;
+    border-radius: 4px;
 }

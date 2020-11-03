@@ -1,23 +1,22 @@
 import {Component} from 'react'
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import CreateIcon from '@material-ui/icons/Create';
 import './detalles-item.css'
+import DeleteIcon from '@material-ui/icons/Delete';
+
+interface Joke{
+  value: string,
+  icon_url: string,
+  created_at: string,
+  url: string,
+  updated_at: string
+}
 
 interface AppProps {
 
-    item: {
-        value: string,
-        icon_url: string,
-        created_at: string
+    item: Joke,
+    OnDelete: (e: React.MouseEvent<HTMLButtonElement>, joke: Joke) => void
 
-    }
     
 }
 
@@ -26,19 +25,15 @@ interface AppState {
     
 }
 
+const mystyle = {
+  backgroundColor: "Transparent",
+  backgroundRepeat:"no-repeat",
+  border: "none",
+  cursor: "pointer",
+  overflow: "hidden",
+  outline:"none",
+  }
 
-
-const useStyles = makeStyles({
-    root: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 140,
-    },
-  });
-
-  
- 
 
 
 export default class DetallesItem extends Component<AppProps,AppState>{
@@ -51,31 +46,26 @@ export default class DetallesItem extends Component<AppProps,AppState>{
         
         return(
             <div className="details">
-            <Card >
-            <CardActionArea>
-              <CardMedia
+              <div  className ='bar' style={{margin:'40px 40px 0px 40px'}}>
+                <h2 style={{fontSize: '30px',marginTop: '15px', marginRight: '50%'}}> Detalles </h2>
+                <button style={mystyle}><CreateIcon  style={{fontSize: '30px'}}></CreateIcon></button>
+                <button onClick= {(ev) => this.props.OnDelete(ev,this.props.item)} style={mystyle}><DeleteIcon  style={{fontSize: '30px'}}></DeleteIcon></button>
                 
-                image={this.props.item.icon_url}
-                title={this.props.item.created_at}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {this.props.item.value}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
+              </div>
+              {this.props.item.value.length > 0 ?
+              <div style={{margin: ' 0px 40px',fontSize: '18px'}}>
+                <p>{this.props.item.value}</p>
+                <p > <b>Creado en :</b> {this.props.item.created_at}</p>
+                <p > <b>Actualizado en :</b> {this.props.item.updated_at}</p>
+                <a style={{fontSize: '14px'}} href= {this.props.item.url}> {this.props.item.url} </a>
+                <div style={{textAlign: 'center',marginTop: '40px'}}>
+                <img src={this.props.item.icon_url} height='100px' width='100px'></img>
+                </div>
+              </div> : <p></p>}
+      
+
+              
+           
           </div>
 
         )
