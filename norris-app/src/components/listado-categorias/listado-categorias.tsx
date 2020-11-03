@@ -1,7 +1,6 @@
-import React, { SyntheticEvent } from 'react'
+import React from 'react'
 import {Component} from 'react'
 import './listado-categorias.css'
-import Loader from '../loader/loader'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -52,11 +51,11 @@ export default class ListadoCategorias extends Component<AppProps,{ frases: stri
                 selected={this.props.selectedIndex === index}
                 onClick={(event) => {this.props.onListar(event, index)}}
                 style={{borderRadius: '20px'}}
-                key={element}
+                key={index}
 
               >
                
-                <ListItemText style={{textAlign: 'center'}} primary={element}/>
+                <ListItemText style={{textAlign: 'center'}} primary={element} key={index}/>
                 
               </ListItem> 
               

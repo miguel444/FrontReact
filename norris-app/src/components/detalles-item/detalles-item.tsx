@@ -9,7 +9,8 @@ interface Joke{
   icon_url: string,
   created_at: string,
   url: string,
-  updated_at: string
+  updated_at: string,
+  categories: []
 }
 
 interface AppProps {
@@ -37,10 +38,7 @@ const mystyle = {
 
 
 export default class DetallesItem extends Component<AppProps,AppState>{
-    constructor(props:AppProps){
-        super(props)
-    }
-
+ 
 
     render(){
         
@@ -55,11 +53,13 @@ export default class DetallesItem extends Component<AppProps,AppState>{
               {this.props.item.value.length > 0 ?
               <div style={{margin: ' 0px 40px',fontSize: '18px'}}>
                 <p>{this.props.item.value}</p>
+               
+              {this.props.item.categories.length > 0 ? <p><b>Categoría : </b>{this.props.item.categories}</p> : <p><b>Categoría : </b> random</p>}
                 <p > <b>Creado en :</b> {this.props.item.created_at}</p>
                 <p > <b>Actualizado en :</b> {this.props.item.updated_at}</p>
                 <a style={{fontSize: '14px'}} href= {this.props.item.url}> {this.props.item.url} </a>
                 <div style={{textAlign: 'center',marginTop: '40px'}}>
-                <img src={this.props.item.icon_url} height='100px' width='100px'></img>
+                <img src={this.props.item.icon_url} height='100px' width='100px' alt='imagen_chuck'></img>
                 </div>
               </div> : <p></p>}
       

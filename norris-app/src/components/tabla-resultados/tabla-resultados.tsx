@@ -16,7 +16,8 @@ interface Joke{
   icon_url: string,
   created_at: string,
   url: string,
-  updated_at: string
+  updated_at: string,
+  categories: []
 }
 
 interface AppProps {
@@ -45,10 +46,7 @@ const mystyle = {
 
 
 export default class TablaResultados extends Component<AppProps,AppState>{
-    constructor(props: AppProps){
-        super(props)
-        
-    }
+   
 
    
     
